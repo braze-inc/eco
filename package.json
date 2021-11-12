@@ -9,7 +9,7 @@
       "url": "https://github.com/sstephenson/eco/raw/master/LICENSE"
     }
   ],
-  "main": "./src/index.js",
+  "main": "./lib/index.js",
   "bin": "./bin/eco",
   "repository": {
     "type": "git",
