@@ -1,5 +1,6 @@
 {compile, precompile} = require "./compiler"
 {preprocess} = require "./preprocessor"
+{unprocess} = require "./unprocessor"
 
 
 module.exports = eco = (source) ->
@@ -19,6 +20,7 @@ eco.compile = compile
 eco.render = (source, data) ->
   (eco source) data
 
+eco.unprocess = unprocess
 
 if require.extensions
   require.extensions[".eco"] = (module, filename) ->
