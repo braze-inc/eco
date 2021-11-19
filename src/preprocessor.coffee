@@ -17,6 +17,7 @@ module.exports = class Preprocessor
     until @scanner.done
       @scanner.scan (token) =>
         @[token[0]].apply @, token.slice 1
+    # console.log(@output)
     @output
 
   record: (line) ->
@@ -56,3 +57,6 @@ module.exports = class Preprocessor
 
   fail: (message) ->
     throw "Parse error on line #{@scanner.lineNo}: #{message}"
+
+  comment: (comment) ->
+    @record "# #{comment}"

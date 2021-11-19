@@ -91,7 +91,9 @@ module.exports = class Scanner
 
     else if @tail
       @mode   = "data"
-      @buffer = ""
+      comment = trim @flush()
+
+      callback ["comment", comment]
 
   flush: ->
     buffer  = @buffer

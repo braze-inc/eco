@@ -1,6 +1,7 @@
 # regex to grab the contents of '__out.push(...)'
 pushRe = /__out\.push\((.*)\)/
 sanitizeRe = /__sanitize\((.*)\)/
+commentRe = /^\/\/ (.*)$/
 
 module.exports = class Unprocessor
   @unprocess: (source) ->
@@ -29,6 +30,15 @@ module.exports = class Unprocessor
 
         # otherwise, push onto output
         @output.push(indent + actual)
+      # if this line is a comment, then...
+      else if commentRe.test(line)
+        # grab the comment text
+        comment = line.match(commentRe)[1]
+
+        # push it into output
+        @output.push(indent + "<%# " + comment + " %>")
+
+      # otherwise, pop it into a regular JS interpolation
       else
         # trim the line to get rid of unwanted whitespace
         trimmed = line.replace(/this./g, "").trim()
